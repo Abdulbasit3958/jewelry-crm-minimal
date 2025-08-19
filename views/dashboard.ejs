@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <p>Total Revenue: <%= totalRevenue %></p>
+  <p>Total Cost: <%= totalCost %></p>
+  <p>Total Profit: <%= totalProfit %></p>
+  <p>Pending COD: <%= pendingCOD %></p>
+
+  <h2>Add Product</h2>
+  <form method="POST" action="/products">
+    <input name="name" placeholder="Name"/>
+    <input name="productCost" placeholder="Product Cost"/>
+    <input name="packagingCost" placeholder="Packaging Cost"/>
+    <input name="shippingCost" placeholder="Shipping Cost"/>
+    <input name="codTax" placeholder="COD Tax %"/>
+    <input name="codFeeUs" placeholder="COD Fee We Pay"/>
+    <input name="sellingPrice" placeholder="Selling Price"/>
+    <button>Add</button>
+  </form>
+
+  <h2>Add Courier</h2>
+  <form method="POST" action="/couriers">
+    <input name="name" placeholder="Courier Name"/>
+    <button>Add</button>
+  </form>
+
+  <h2>Add Order</h2>
+  <form method="POST" action="/orders">
+    <select name="product">
+      <% products.forEach(p => { %><option value="<%= p._id %>"><%= p.name %></option><% }) %>
+    </select>
+    <select name="courier">
+      <% couriers.forEach(c => { %><option value="<%= c._id %>"><%= c.name %></option><% }) %>
+    </select>
+    <input name="quantity" placeholder="Quantity"/>
+    <select name="paymentType"><option>COD</option><option>Prepaid</option></select>
+    <label><input type="checkbox" name="dispatched"/> Dispatched</label>
+    <label><input type="checkbox" name="paymentDone"/> Payment Done</label>
+    <label><input type="checkbox" name="returned"/> Returned</label>
+    <input name="review" placeholder="Review"/>
+    <button>Add</button>
+  </form>
+
+  <h2>Add Expense</h2>
+  <form method="POST" action="/expenses">
+    <input name="name" placeholder="Expense Name"/>
+    <input name="amount" placeholder="Amount"/>
+    <button>Add</button>
+  </form>
+</body>
+</html>
